@@ -10,9 +10,10 @@ const connect = async () => {
   } catch (err) {
     Logger.log('error', 'Error connecting to MongoDB', { label: Label.Database })
     Logger.log('error', err, { label: Label.Database })
+    process.exit(1)
   }
 }
 
-module.exports = {
-  connect,
+module.exports = Database = {
+  connect
 }

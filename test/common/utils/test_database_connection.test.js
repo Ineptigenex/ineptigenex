@@ -35,20 +35,24 @@ describe('Database', function () {
 
   describe('Database.connection() function failure', () => {
 
-    let sandbox
+    let sandbox, exitSandbox
 
     before(() => {
-      sandbox = Sinon.stub(mongoose, 'connect').throws()
+      sandbox = Sinon.stub(mongoose, 'connect').rejects()
+      exitSandbox = require('sinon').stub(process, 'exit').callsFake(() => {
+        process.exitCode = 1
+      })
     })
     after(() => {
       sandbox.restore()
+      exitSandbox.restore()
     })
 
     it('should not connect to the database', async () => {
-
       await Database.connect()
 
-      expect(mongoose.connection.readyState).to.equal(0)
+      expect(exitSandbox.calledOnce).to.be.true
+      expect(process.exitCode).to.equal(1)
     })
   })
 

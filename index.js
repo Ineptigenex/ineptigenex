@@ -1,7 +1,5 @@
-const Logger = require('./src/common/classes/Logger')
-const { Label } = require('./src/common/utils/Constants')
-const Database = require('./src/common/utils/Database')
+const GenexClient = require('./src/common/classes/GenexClient')
 
-Database.connect()
-Logger.log('info', 'Starting Genex...', { label: Label.Main })
+const client = new GenexClient()
 
+client.start()
