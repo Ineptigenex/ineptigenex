@@ -52,6 +52,7 @@ const FileTransports = new transports.DailyRotateFile({
     }),
     fileFormat
   ),
+  silent: process.env.NODE_ENV === 'test'
 })
 
 const ConsoleTransports = new transports.Console({
@@ -61,7 +62,8 @@ const ConsoleTransports = new transports.Console({
       format: 'HH:mm:ss'
     }),
     consoleFormat
-  )
+  ),
+  silent: process.env.NODE_ENV === 'test'
 })
 
 /**

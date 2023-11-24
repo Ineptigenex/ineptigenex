@@ -7,26 +7,28 @@
     "license": "MIT",
     "scripts": {
         "start": "node index.js",
-        "test": "nyc --reporter=html --reporter=text mocha",
+        "test": "NODE_ENV=test nyc --reporter=html --reporter=text mocha \"./test/**/*.test.js\"",
         "coverage": "nyc report --reporter=text-lcov | coveralls"
     },
     "dependencies": {
-        "discord.js": "14.14.1",
         "@discordjs/builders": "1.7.0",
         "@discordjs/opus": "0.9.0",
         "@discordjs/rest": "2.2.0",
         "@discordjs/voice": "0.16.1",
-        "dotenv": "16.3.1",
+        "chalk": "^4.1.2",
         "cron": "3.1.6",
+        "discord.js": "14.14.1",
+        "dotenv": "16.3.1",
+        "mongoose": "^8.0.1",
         "winston": "3.11.0",
-        "winston-daily-rotate-file": "4.7.1",
-        "chalk": "^4.1.2"
+        "winston-daily-rotate-file": "4.7.1"
     },
     "devDependencies": {
-        "mocha": "*",
         "chai": "*",
-        "nyc": "^15.1.0",
         "eslint": "^8.54.0",
-        "eslint-config-prettier": "^9.0.0"
+        "eslint-config-prettier": "^9.0.0",
+        "mocha": "*",
+        "nyc": "^15.1.0",
+        "sinon": "^17.0.1"
     }
 }

@@ -1,3 +1,5 @@
-const Logger = require('./src/common/classes/Logger')
+const GenexClient = require('./src/common/classes/GenexClient')
 
-Logger.log('info', 'Starting Genex...', { label: 'main' })
+const client = new GenexClient()
+
+client.start()
