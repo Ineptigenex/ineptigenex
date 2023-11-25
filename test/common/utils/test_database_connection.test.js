@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const Database = require('../../../src/common/utils/Database')
 const { expect } = require('chai')
 const Sinon = require('sinon')
+const Logger = require('../../../src/common/classes/Logger')
 
 // Test suite
 describe('Database', function () {
@@ -27,9 +28,6 @@ describe('Database', function () {
 
       // Check if the connection is successful
       expect(mongoose.connection.readyState).to.equal(1)
-
-      // Disconnect from the database
-      await mongoose.disconnect()
     })
   })
 
@@ -53,6 +51,27 @@ describe('Database', function () {
 
       expect(exitSandbox.calledOnce).to.be.true
       expect(process.exitCode).to.equal(1)
+    })
+  })
+
+  describe('Database.disconnect() function success', () => {
+
+    let sandbox
+
+    // before(() => {
+    //   sandbox = Sinon.stub(mongoose, 'disconnect').resolves().callsFake(() => {
+    //     mongoose.connection.readyState = 0
+    //   })
+    // })
+    // after(() => {
+    //   sandbox.restore()
+    // })
+
+    it('should disconnect from the database', async () => {
+      // Disconnect from the database
+      await Database.disconnect()
+      // Check if the disconnection is successful
+      expect(mongoose.connection.readyState).to.equal(0)
     })
   })
 

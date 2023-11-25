@@ -39,7 +39,7 @@ describe('Genex Client', function() {
     it('should call the Database.connect() function', async () => {
       genexClient.start()
 
-      expect(dbSandbox.calledOnce).to.be.true
+      expect(Database.connect.calledOnce).to.be.true
     })
 
     it('should call the Client.login() function', async () => {
