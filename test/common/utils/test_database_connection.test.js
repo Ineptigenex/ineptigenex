@@ -12,14 +12,14 @@ describe('Database', function () {
 
     let sandbox
 
-    before(() => {
-      sandbox = Sinon.stub(mongoose, 'connect').resolves().callsFake(() => {
-        mongoose.connection.readyState = 1
-      })
-    })
-    after(() => {
-      sandbox.restore()
-    })
+    // before(() => {
+    //   sandbox = Sinon.stub(mongoose, 'connect').resolves().callsFake(() => {
+    //     mongoose.connection.readyState = 1
+    //   })
+    // })
+    // after(() => {
+    //   sandbox.restore()
+    // })
 
     it('should connect to the database', async () => {
 
@@ -58,14 +58,14 @@ describe('Database', function () {
 
     let sandbox
 
-    // before(() => {
-    //   sandbox = Sinon.stub(mongoose, 'disconnect').resolves().callsFake(() => {
-    //     mongoose.connection.readyState = 0
-    //   })
-    // })
-    // after(() => {
-    //   sandbox.restore()
-    // })
+    before(() => {
+      sandbox = Sinon.stub(mongoose, 'disconnect').resolves().callsFake(() => {
+        mongoose.connection.readyState = 0
+      })
+    })
+    after(() => {
+      sandbox.restore()
+    })
 
     it('should disconnect from the database', async () => {
       // Disconnect from the database
