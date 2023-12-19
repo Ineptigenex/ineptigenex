@@ -27,9 +27,6 @@ describe('Database', function () {
 
       // Check if the connection is successful
       expect(mongoose.connection.readyState).to.equal(1)
-
-      // Disconnect from the database
-      await mongoose.disconnect()
     })
   })
 
@@ -50,6 +47,50 @@ describe('Database', function () {
 
     it('should not connect to the database', async () => {
       await Database.connect()
+
+      expect(exitSandbox.calledOnce).to.be.true
+      expect(process.exitCode).to.equal(1)
+    })
+  })
+
+  describe('Database.disconnect() function success', () => {
+
+    let sandbox
+
+    before(() => {
+      sandbox = Sinon.stub(mongoose, 'disconnect').resolves().callsFake(() => {
+        mongoose.connection.readyState = 0
+      })
+    })
+    after(() => {
+      sandbox.restore()
+    })
+
+    it('should disconnect from the database', async () => {
+      // Disconnect from the database
+      await Database.disconnect()
+      // Check if the disconnection is successful
+      expect(mongoose.connection.readyState).to.equal(0)
+    })
+  })
+
+  describe('Database.disconnect() function failure', () => {
+
+    let sandbox, exitSandbox
+
+    before(() => {
+      sandbox = Sinon.stub(mongoose, 'disconnect').rejects()
+      exitSandbox = require('sinon').stub(process, 'exit').callsFake(() => {
+        process.exitCode = 1
+      })
+    })
+    after(() => {
+      sandbox.restore()
+      exitSandbox.restore()
+    })
+
+    it('should not disconnect from the database', async () => {
+      await Database.disconnect()
 
       expect(exitSandbox.calledOnce).to.be.true
       expect(process.exitCode).to.equal(1)

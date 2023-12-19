@@ -25,18 +25,27 @@ class GenexClient extends Client {
       }
     })
 
-    /**
-     * @type {SlashCollection}
-     */
     this.slashCommands = new Collection()
+    this.slashCommandArray = []
   }
 
   async start() {
     Database.connect()
       .then(() => {
-        this.login(process.env.TOKENID)
+        [
+          "slash-command.register"
+        ].forEach((register) => {
+          require(`../handlers/registers/${register}`)(this)
+        })
       })
       .then(() => {
+        require('../handlers/registers/client.register')(this)
+      })
+      .then(() => {
+        require('../handlers/events/interaction-create.event')(this)
+      })
+      .then(() => {
+        this.login(process.env.TOKENID)
         Logger.log("info", "Connected to Discord", { label: Label.Discord })
       })
   }

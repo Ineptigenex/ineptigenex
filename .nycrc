@@ -6,7 +6,9 @@
         "**/node_modules/**",
         "**/test/**",
         "**/coverage/**",
-        "src/common/classes/Logger.js"
+        "src/common/classes/Logger.js",
+        "src/common/utils/Config.js",
+        "src/common/utils/Constants.js"
     ],
     "all": true,
     "check-coverage": true
