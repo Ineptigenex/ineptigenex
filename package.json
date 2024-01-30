@@ -3,12 +3,16 @@
     "version": "0.0.1",
     "description": "",
     "author": "quangpao",
-    "main": "index.js",
+    "main": "dist/app.js",
     "license": "MIT",
     "scripts": {
-        "start": "node index.js",
-        "test": "NODE_ENV=test nyc --reporter=html --reporter=text mocha \"./test/**/*.test.js\"",
-        "coverage": "nyc report --reporter=text-lcov | coveralls"
+        "start": "tsc && node ./dist/app.js",
+        "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/app.ts",
+        "lint": "eslint . --ext .ts",
+        "lint:fix": "eslint . --ext .ts --fix",
+        "build": "tsc",
+        "test": "NODE_ENV=test jest",
+        "coverage": "NODE_ENV=test jest --coverage"
     },
     "dependencies": {
         "@discordjs/builders": "1.7.0",
@@ -24,11 +28,16 @@
         "winston-daily-rotate-file": "4.7.1"
     },
     "devDependencies": {
-        "chai": "*",
+        "@types/jest": "^29.5.11",
+        "@typescript-eslint/eslint-plugin": "^6.19.1",
+        "@typescript-eslint/parser": "^6.19.1",
         "eslint": "^8.56.0",
         "eslint-config-prettier": "^9.1.0",
-        "mocha": "*",
+        "jest": "^29.7.0",
         "nyc": "^15.1.0",
-        "sinon": "^17.0.1"
+        "ts-jest": "^29.1.2",
+        "ts-node": "^10.9.2",
+        "tsc": "^2.0.4",
+        "typescript": "^5.3.3"
     }
 }

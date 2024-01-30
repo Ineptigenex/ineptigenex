@@ -1,12 +1,41 @@
 version: '3.8'
 
 services:
+  # Discord bot container
   node:
+    container_name: discord-bot
     build:
-      context: ""
+      context: "."
       dockerfile: .docker/Dockerfile
-    command: nodemon index.js
+    depends_on:
+      - db
+    command: npm run dev
     environment:
       - NODE_ENV=development
     volumes:
       - ./:/app
+      - /app/node_modules
+    networks:
+      - discord-bot-network
+  
+  # MongoDB container 
+  db:
+    image: mongo:6.0.13
+    container_name: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - ${MONGODB_PORT}:27017
+    networks:
+      - discord-bot-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  discord-bot-network:
+    driver: bridge
