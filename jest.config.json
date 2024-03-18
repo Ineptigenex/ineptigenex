@@ -1,8 +1,8 @@
 {
-  "roots": ["<rootDir>/test"],
+  "roots": ["<rootDir>/tests"],
   "transform": {
     "^.+\\.ts?$": "ts-jest"
   },
-  "testRegex": "(/test/.*|(\\.|/)(test|spec))\\.ts?$",
+  "testRegex": "(/tests/.*|(\\.|/)(test|spec))\\.ts?$",
   "moduleFileExtensions": ["ts", "js", "json", "node"]
 }
