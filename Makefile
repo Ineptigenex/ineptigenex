@@ -20,6 +20,9 @@ down:
 log:
 	docker compose logs -f
 
+log-node:
+	docker compose logs -f $(CONTAINER)
+
 exec:
 	docker compose exec $(CONTAINER) bash
 

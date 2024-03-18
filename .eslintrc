@@ -1,14 +1,17 @@
 {
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2018
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+
   },
   "extends": [
-    "prettier"
+    "prettier",
+    "plugin:@typescript-eslint/recommended"
   ],
   "env": {
-    "node": true,
-    "es6": true,
-    "mocha": true
+    "node": true
   },
   "ignorePatterns": [
     "node_modules/",
@@ -16,10 +19,10 @@
   ],
   "rules": {
     "computed-property-spacing": [2, "never"],
-    "object-curly-spacing": [2, "always"],
-    "keyword-spacing": [2, {"before": true, "after": true}],
-    "semi": [2, "never"],
-    "indent": [
+    "@typescript-eslint/object-curly-spacing": [2, "always"],
+    "@typescript-eslint/keyword-spacing": [2, {"before": true, "after": true}],
+    "@typescript-eslint/semi": [2, "never"],
+    "@typescript-eslint/indent": [
       "error",
       2,
       {
@@ -120,10 +123,19 @@
     "space-unary-ops": "error",
     "spaced-comment": "error",
     "yoda": "error",
-    "no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "next" }],
     "eol-last": [
       "error",
       "always"
+    ],
+    "comma-dangle": ["error", "never"],
+    "quotes": [
+      "error",
+      "single",
+      {
+        "allowTemplateLiterals": true
+      }
     ]
+
   }
 }
