@@ -4,11 +4,12 @@
         "esModuleInterop": true,
         "outDir": "./dist",
         "allowJs": true,
-        "target": "ES2022"
+        "target": "ES2022",
+        "module": "ES2022"
     },
         "include": [
         "./src/**/*",
-        "./__tests__/**/*"
+        "./tests/**/*"
     ],
         "exclude": [
         "./node_modules",
