@@ -1,5 +1,8 @@
-const greeting = 'World'
+import { Client, Events, GatewayIntentBits } from "discord.js";
 
-export function sayHello(name: string = greeting): string {
-  return `Hello, ${name}!`
-}
+const client = new Client({intents: [GatewayIntentBits.Guilds]});
+
+client.once(Events.ClientReady, (c) => {
+    console.log(`Logged in as ${c.user?.tag}`);
+})
+client.login(process.env.TOKENID)
