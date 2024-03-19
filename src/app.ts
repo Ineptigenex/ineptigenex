@@ -1,3 +1,5 @@
-import MongoDBConnection from './common/utils/MongoDBConnection'
+const greeting = 'World'
 
-MongoDBConnection.getInstance()
+export function sayHello(name: string = greeting): string {
+  return `Hello, ${name}!`
+}
