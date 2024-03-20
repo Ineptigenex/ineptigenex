@@ -1,19 +1,40 @@
-FROM node:20-slim
+# OVEN - BUN Official Image
+FROM oven/bun:latest as base
 WORKDIR /app
-
-RUN apt-get update
-RUN apt-get install -y ffmpeg \
+RUN apt-get update && apt-get install -y \
     build-essential \
-    libtool-bin
+    python3 \
+    ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN npm install -g nodemon typescript
+# Install dependencies to temp directory
+FROM base as build
 
-COPY package*.json ./
-RUN npm install
+# Dev dependencies 
+RUN mkdir -p /temp/dev
+COPY package.json bun.lockb /temp/dev/
+RUN cd /temp/dev && bun install --frozen-lockfile
+
+# Prod dependencies
+RUN mkdir -p /temp/prod
+COPY package.json bun.lockb /temp/prod/
+RUN cd /temp/prod && bun install --frozen-lockfile --production
+
+# Copy node_modules from temp directory to app directory
+FROM base as prerelease
+COPY --from=build /temp/dev/node_modules node_modules
 COPY . .
-RUN npm run build
 
-ENV PS1A="🐳\[\e[33m\]\u\[\e[m\]@node\[\e[36m\][\[\e[m\]\[\e[36m\]\w\[\e[m\]\[\e[36m\]]\[\e[m\]: "
+# Test and build the app
+# ENV NODE_ENV=production
+# RUN bun test
+# RUN bun run build
 
-RUN echo 'PS1=$PS1A' >> ~/.bashrc
-CMD [ "node", "dist/app.js" ]
+# Copy the app to the final image
+FROM base as release
+COPY --from=build /temp/prod/node_modules node_modules
+COPY --from=prerelease /app/src/app.ts src/app.ts
+COPY --from=prerelease /app/package.json package.json
+
+USER bun
+ENTRYPOINT [ "bun", "run", "dev" ]

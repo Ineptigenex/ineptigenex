@@ -9,7 +9,7 @@ services:
       dockerfile: .docker/Dockerfile
     depends_on:
       - db
-    command: npm run dev
+    command: bun run dev
     environment:
       - NODE_ENV=development
     volumes:
