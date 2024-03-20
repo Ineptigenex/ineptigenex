@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "bun --watch src/app.ts",
     "ci": "biome ci .",
-    "lint": "biome check --aplly ."
+    "lint": "biome check --apply .",
+    "test": "NODE_ENV=test bun test"
   },
   "devDependencies": {
     "@biomejs/biome": "1.6.1",
@@ -21,7 +22,10 @@
   "dependencies": {
     "@discordjs/opus": "^0.9.0",
     "@discordjs/voice": "^0.16.1",
+    "chalk": "^5.3.0",
     "discord.js": "^14.14.1",
-    "mongoose": "^8.2.2"
+    "mongoose": "^8.2.2",
+    "winston": "^3.12.0",
+    "winston-daily-rotate-file": "^5.0.0"
   }
 }
