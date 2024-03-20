@@ -7,7 +7,9 @@
   "module": "src/app.ts",
   "type": "module",
   "scripts": {
-    "dev": "bun --watch src/app.ts"
+    "dev": "bun --watch src/app.ts",
+    "ci": "biome ci .",
+    "lint": "biome check --aplly ."
   },
   "devDependencies": {
     "@biomejs/biome": "1.6.1",
