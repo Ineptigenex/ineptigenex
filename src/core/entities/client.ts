@@ -1,5 +1,3 @@
-import { Client } from "discord.js";
+import { Client } from 'discord.js';
 
-export class InepClient extends Client {
-  
-}
+export class InepClient extends Client {}
