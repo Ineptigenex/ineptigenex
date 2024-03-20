@@ -3,19 +3,19 @@ import * as dotenv from 'dotenv';
 import type { Config, ProcessVariables } from '../core/types/config';
 
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
-const processVariables: ProcessVariables = process.env as ProcessVariables;
+const processVariables = process.env as ProcessVariables;
 
 export const config: Config = {
   env: processVariables.NODE_ENV,
   db: {
-    username: processVariables.DB_USERNAME,
-    password: processVariables.DB_PASSWORD,
-    database: processVariables.DB_DATABASE,
-    host: processVariables.DB_HOST,
-    port: processVariables.DB_PORT,
+    username: processVariables.MONGODB_USERNAME,
+    password: processVariables.MONGODB_PASSWORD,
+    database: processVariables.MONGODB_DATABASE,
+    host: processVariables.MONGODB_HOST,
+    port: processVariables.MONGODB_PORT,
   },
   discord: {
-    tokenID: processVariables.TOKEN_ID,
-    clientID: processVariables.CLIENT_ID,
+    tokenID: processVariables.TOKENID,
+    clientID: processVariables.CLIENTID,
   },
 };

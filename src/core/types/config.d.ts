@@ -1,4 +1,9 @@
-export type Environment = 'development' | 'production' | 'test' | 'local';
+export enum Environment {
+  Development = 'development',
+  Production = 'production',
+  Local = 'local',
+  Test = 'test',
+}
 
 export interface Config {
   env: Environment;
@@ -20,8 +25,8 @@ export interface DiscordConfig {
   clientID: string;
 }
 
-export interface ProcessVariables extends NodeJS.ProcessEnv {
-  NODE_ENV: Environment;
+export interface ProcessVariables {
+  APP_ENV: Environment;
   DB_USERNAME: string;
   DB_PASSWORD: string;
   DB_DATABASE: string;
