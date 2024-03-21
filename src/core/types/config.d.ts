@@ -25,7 +25,7 @@ export interface DiscordConfig {
   clientID: string;
 }
 
-export interface ProcessVariables {
+export interface ProcessVariables extends NodeJS.ProcessEnv {
   APP_ENV: Environment;
   DB_USERNAME: string;
   DB_PASSWORD: string;
