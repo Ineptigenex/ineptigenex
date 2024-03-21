@@ -1,6 +1,6 @@
+import { config } from '@config/config';
+import { logger } from '@utils/logger';
 import { Client, GatewayIntentBits } from 'discord.js';
-import { config } from '../../configuration/config';
-import { logger } from '../../shared/utils/logger';
 
 export class InepClient extends Client {
   constructor() {

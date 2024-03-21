@@ -1,3 +1,3 @@
-import type { InepClient } from '../entities/client';
+import type { InepClient } from '@entities/client';
 
 module.exports = (client: InepClient) => {};

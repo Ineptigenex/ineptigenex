@@ -1,8 +1,5 @@
-import * as path from 'node:path';
-import * as dotenv from 'dotenv';
-import type { Config, ProcessVariables } from '../core/types/config';
+import type { Config, ProcessVariables } from '@core/types/config';
 
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 const processVariables = process.env as ProcessVariables;
 
 export const config: Config = {

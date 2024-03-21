@@ -24,12 +24,12 @@ services:
     container_name: mongo
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
     volumes:
       - mongodb_data:/data/db
     ports:
-      - ${MONGODB_PORT}:27017
+      - ${DB_PORT}:27017
     networks:
       - discord-bot-network
 
