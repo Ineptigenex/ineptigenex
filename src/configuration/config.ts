@@ -1,15 +1,15 @@
-import type { Config, ProcessVariables } from '../core/types/config';
+import type { Config, ProcessVariables } from '@core/types/config';
 
-const processVariables: ProcessVariables = process.env as ProcessVariables;
+const processVariables = process.env as ProcessVariables;
 
 export const config: Config = {
-  env: processVariables.NODE_ENV,
+  env: processVariables.APP_ENV,
   db: {
     username: processVariables.DB_USERNAME,
     password: processVariables.DB_PASSWORD,
     database: processVariables.DB_DATABASE,
     host: processVariables.DB_HOST,
-    port: Number(processVariables.DB_PORT),
+    port: processVariables.DB_PORT,
   },
   discord: {
     tokenID: processVariables.TOKEN_ID,
