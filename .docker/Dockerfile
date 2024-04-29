@@ -38,5 +38,5 @@ COPY --from=build /temp/prod/node_modules node_modules
 COPY --from=prerelease /app/src/app.ts src/app.ts
 COPY --from=prerelease /app/package.json package.json
 
-USER bun
+# USER bun
 ENTRYPOINT [ "bun", "run", "dev" ]

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": [ "bun-types" ],
     // Enable latest features
     "lib": ["ESNext"],
     "target": "ESNext",
@@ -17,6 +18,8 @@
     // Best practices
     "strict": true,
     "skipLibCheck": true,
+    "noImplicitAny": true,
+    "noImplicitOverride": true,
     "noFallthroughCasesInSwitch": true,
 
     // Some stricter flags (disabled by default)
@@ -31,7 +34,8 @@
       "@core/*": ["./core/*"],
       "@entities/*": ["./core/entities/*"],
       "@utils/*": ["./shared/utils/*"],
-      "@modules/*": ["./modules/*"]
+      "@modules/*": ["./modules/*"],
+      "@music/*": ["./modules/music/*"],
     }
   }
 }

@@ -10,6 +10,7 @@ export interface Config {
   db: DBConfig;
   discord: DiscordConfig;
   fileSystem?: FileSystemConfig;
+  spotify?: SpotifyConfig;
 }
 
 export interface DBConfig {
@@ -34,6 +35,13 @@ export interface ProcessVariables extends NodeJS.ProcessEnv {
   DB_PORT: number;
   TOKEN_ID: string;
   CLIENT_ID: string;
+  SPOTIFY_CLIENT_ID: string;
+  SPOTIFY_CLIENT_SECRET: string;
+}
+
+export interface SpotifyConfig {
+  clientID: string;
+  clientSecret: string;
 }
 
 // export interface FileSystemConfig {}

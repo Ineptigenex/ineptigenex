@@ -8,14 +8,20 @@
   "type": "module",
   "scripts": {
     "dev": "bun --watch src/app.ts",
-    "ci": "biome ci .",
-    "lint": "biome check --apply .",
+    "ci": "npx eslint .",
+    "lint": "npx eslint . --fix",
     "test": "NODE_ENV=test bun test"
   },
-  "trustedDependencies": ["sodium", "@distube/yt-dlp", "@biomejs/biome"],
+  "trustedDependencies": ["@discordjs/opus", "sodium", "@distube/yt-dlp"],
   "devDependencies": {
-    "@biomejs/biome": "1.6.1",
-    "@types/bun": "latest"
+    "@eslint/js": "^9.1.1",
+    "@types/bun": "latest",
+    "@types/eslint-config-prettier": "^6.11.3",
+    "eslint": "^9.1.1",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.1.0",
+    "prettier": "^3.2.5",
+    "typescript-eslint": "^7.7.1"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
@@ -26,9 +32,10 @@
     "@distube/soundcloud": "^1.3.3",
     "@distube/spotify": "^1.6.0",
     "@distube/yt-dlp": "^1.1.3",
+    "@distube/ytsr": "^2.0.0",
     "chalk": "^5.3.0",
     "discord.js": "^14.14.1",
-    "distube": "latest",
+    "distube": "^4.2.2",
     "mongoose": "^8.2.2",
     "sodium": "^3.0.2",
     "winston": "^3.12.0",

@@ -1,4 +1,4 @@
-import type { Config, ProcessVariables } from '@core/types/config';
+import type { Config, ProcessVariables } from '@core/types';
 
 const processVariables = process.env as ProcessVariables;
 
@@ -14,5 +14,9 @@ export const config: Config = {
   discord: {
     tokenID: processVariables.TOKEN_ID,
     clientID: processVariables.CLIENT_ID,
+  },
+  spotify: {
+    clientID: processVariables.SPOTIFY_CLIENT_ID,
+    clientSecret: processVariables.SPOTIFY_CLIENT_SECRET,
   },
 };
