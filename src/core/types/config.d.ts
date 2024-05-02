@@ -1,8 +1,8 @@
 export enum Environment {
-  Development = 'development',
-  Production = 'production',
-  Local = 'local',
-  Test = 'test',
+  Development = "development",
+  Production = "production",
+  Local = "local",
+  Test = "test",
 }
 
 export interface Config {

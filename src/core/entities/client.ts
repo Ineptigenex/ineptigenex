@@ -1,16 +1,15 @@
-import { config } from '@config/config';
-import { logger } from '@utils/logger';
-import { Client, GatewayIntentBits, REST, Routes } from 'discord.js';
-import { InepTube } from './distube';
-import SoundCloudPlugin from '@distube/soundcloud';
-import SpotifyPlugin from '@distube/spotify';
-import { YtDlpPlugin } from '@distube/yt-dlp';
-import { InepCommands } from './commands';
-import type { DisTubeOptions } from 'distube';
-import { InepInteraction } from './interactions';
+import { config } from "@config/config";
+import { logger } from "@utils/logger";
+import { Client, GatewayIntentBits, REST, Routes } from "discord.js";
+import { InepTube } from "./distube";
+import SoundCloudPlugin from "@distube/soundcloud";
+import SpotifyPlugin from "@distube/spotify";
+import { YtDlpPlugin } from "@distube/yt-dlp";
+import { InepCommands } from "./commands";
+import type { DisTubeOptions } from "distube";
+import { InepInteraction } from "./interactions";
 
 export class InepClient extends Client {
-
   public distube: InepTube | undefined;
   public commands: InepCommands;
 
@@ -25,7 +24,7 @@ export class InepClient extends Client {
       ],
       failIfNotExists: false,
       allowedMentions: {
-        parse: ['everyone', 'roles', 'users'],
+        parse: ["everyone", "roles", "users"],
         repliedUser: true,
       },
     });
@@ -34,23 +33,23 @@ export class InepClient extends Client {
   }
 
   public async start() {
-    logger.info('Starting InepClient...');
+    logger.info("Starting InepClient...");
     await this.initDistube();
     await this.initCommands();
     await this.initEvents();
 
     try {
       await this.login(config.discord.tokenID);
-      
+
       logger.info(`Logged in as ${this.user?.tag}`);
     } catch (error) {
-      logger.error('Failed to login to Discord:', error);
+      logger.error("Failed to login to Discord:", error);
       process.exit(1);
     }
-  } 
+  }
 
   private async initDistube() {
-    logger.info('[InepTube] Initializing...');
+    logger.info("[InepTube] Initializing...");
 
     this.distube = new InepTube(this, {
       searchSongs: 5,
@@ -59,8 +58,8 @@ export class InepClient extends Client {
       leaveOnFinish: false,
       leaveOnStop: false,
       ytdlOptions: {
-        filter: 'audioonly',
-        quality: 'highestaudio',
+        filter: "audioonly",
+        quality: "highestaudio",
         highWaterMark: 1 << 25,
       },
       emitNewSongOnly: true,
@@ -73,42 +72,42 @@ export class InepClient extends Client {
           api: {
             clientId: config.spotify?.clientID,
             clientSecret: config.spotify?.clientSecret,
-            topTracksCountry: 'VN'
-          }
+            topTracksCountry: "VN",
+          },
         }),
-      ]
-    } as DisTubeOptions)
+      ],
+    } as DisTubeOptions);
   }
 
   private async initCommands() {
-    logger.info('[InepCommands] Initializing...');
+    logger.info("[InepCommands] Initializing...");
 
     await this.commands.register(this);
   }
 
   private async initEvents() {
-    logger.info('[InepEvents] Initializing...');
+    logger.info("[InepEvents] Initializing...");
 
     //-----------------------------------------
-    logger.info('[InepEvents] Register |ready| event');
-    this.on('ready', async () => {
-      logger.info('[InepEvents] Triggered |ready| event');
+    logger.info("[InepEvents] Register |ready| event");
+    this.on("ready", async () => {
+      logger.info("[InepEvents] Triggered |ready| event");
 
       const rest = new REST().setToken(config.discord.tokenID);
       await rest.put(Routes.applicationCommands(config.discord.clientID), {
-        body: this.commands.slash.map((command) => command.builder.toJSON())
-      })
+        body: this.commands.slash.map((command) => command.builder.toJSON()),
+      });
 
-      logger.info('[InepEvents] Triggered |ready| event -- DONE');
+      logger.info("[InepEvents] Triggered |ready| event -- DONE");
     });
     //-----------------------------------------
-    logger.info('[InepEvents] Register |interactionCreate| event');
-    this.on('interactionCreate', async (interaction) => {
+    logger.info("[InepEvents] Register |interactionCreate| event");
+    this.on("interactionCreate", async (interaction) => {
       logger.info(`[InepEvents] Triggered |interactionCreate| event`);
       InepInteraction.execute(this, interaction);
-    })
+    });
     //-----------------------------------------
 
-    logger.info('[InepEvents] Initialized!');
+    logger.info("[InepEvents] Initialized!");
   }
 }

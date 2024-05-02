@@ -1,13 +1,13 @@
-import chalk from 'chalk';
-import { createLogger, format, transports } from 'winston';
+import chalk from "chalk";
+import { createLogger, format, transports } from "winston";
 
 const ConsoleTransport = () => {
   const consoleFormat = format.printf(({ level, message }) => {
     let levelFormat = level.toUpperCase().charAt(0);
     levelFormat =
-      level === 'error'
+      level === "error"
         ? chalk.redBright(levelFormat)
-        : level === 'warn'
+        : level === "warn"
           ? chalk.yellowBright(levelFormat)
           : chalk.greenBright(levelFormat);
     return `[${levelFormat}] ${message}`;
@@ -30,6 +30,6 @@ const ConsoleTransport = () => {
 // TODO: Implement DiscordTransport
 
 export const logger = createLogger({
-  level: 'info',
+  level: "info",
   transports: [ConsoleTransport()],
 });

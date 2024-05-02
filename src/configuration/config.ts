@@ -1,4 +1,4 @@
-import type { Config, ProcessVariables } from '@core/types';
+import type { Config, ProcessVariables } from "@core/types";
 
 const processVariables = process.env as ProcessVariables;
 

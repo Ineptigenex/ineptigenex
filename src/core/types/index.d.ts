@@ -1,1 +1,1 @@
-export { Config, ProcessVariables, Environment, DBConfig, DiscordConfig } from './config';
+export * from "./config";
